@@ -72,7 +72,7 @@ jobs:
         path: ./build
 
     - name: Deploy to gh-pages
-      uses: peaceiris/actions-gh-pages@v3
+      uses: ad-m/github-push-action@master
       with:
         github_token: ${{ secrets.TOKEN_GITHUB }}
         publish_dir: ./build
