@@ -16,7 +16,7 @@ jobs:
       REACT_APP_TWITCH_CLIENT_ID: ${{ secrets.REACT_APP_TWITCH_CLIENT_ID }}
       REACT_APP_UMAMI_SRC: ${{ secrets.REACT_APP_UMAMI_SRC }}
       REACT_APP_UMAMI_WEBSITE_ID: ${{ secrets.REACT_APP_UMAMI_WEBSITE_ID }}
-      REACT_APP_TWITCH_REDIRECT_URI: https://jakemiki.github.io/twitch-clip-queue/auth
+      REACT_APP_TWITCH_REDIRECT_URI: https://granacik320.github.io/twitch-clip-queue/auth
       REACT_APP_BASEPATH: /twitch-clip-queue/
       REACT_APP_LOG_LEVEL: warn
 
