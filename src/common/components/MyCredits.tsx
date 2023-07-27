@@ -11,8 +11,8 @@ function MyCredits() {
           JakeMiki
         </BrandButton>
         <div>/</div>
-        <BrandButton href="https://www.twitch.tv/SirMuffin9" icon={<BrandTwitch size={16} />}>
-          SirMuffin9
+        <BrandButton href="https://github.com/granacik320" icon={<BrandGithub size={16} />}>
+          granacik___
         </BrandButton>
       </Group>
     </Text>
