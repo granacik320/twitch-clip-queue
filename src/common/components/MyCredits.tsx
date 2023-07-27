@@ -1,5 +1,5 @@
 import { Group, Text } from '@mantine/core';
-import { BrandTwitch, BrandGithub } from 'tabler-icons-react';
+import { BrandGithub } from 'tabler-icons-react';
 import BrandButton from './BrandButton';
 
 function MyCredits() {
