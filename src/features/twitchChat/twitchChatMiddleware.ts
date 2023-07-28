@@ -38,24 +38,12 @@ const createClient = ({ token, username }: { token: string; username: string }) 
   return client;
 };
 
-const usersnames = ['granacik___','granacik__','granacik_','granacik','granaci',"asdasdasdas","asdasdasda","asdasdasd","asdasdas","asdasdasdasd",'sgranacik___','gsranacik__','granascik_','granascik','gransaci',"asdasdasdsas","asdasdassda","asdsasdasd","asdassdas","assdasdasdasd"]
-
 const open: IDBOpenDBRequest = indexedDB.open("twitch-clip-queue-banlist");
 
 open.onupgradeneeded = function (event: IDBVersionChangeEvent) {
   const db: IDBDatabase = (event.target as IDBOpenDBRequest).result;
   const store: IDBObjectStore = db.createObjectStore("banlist");
   store.createIndex("timestamp", "timestamp");
-
-  // Populate with some dummy data, with about half from the past:
-  for (let id = 0; id < 20; ++id) {
-    store.put(
-      {
-        timestamp: new Date(Date.now() + 1000000000000),
-      },
-      usersnames[id]
-    );
-  }
 };
 
 open.onsuccess = function (event: Event) {
