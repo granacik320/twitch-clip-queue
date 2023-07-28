@@ -30,7 +30,7 @@ function PlayerButtons({ className }: { className?: string }) {
 
       store.put(
         {
-          timestamp: new Date(Date.now() + 86400000),
+          timestamp: new Date(Date.now() + 604800000),
         },
         currentClip?.submitters[0]
       );
@@ -59,7 +59,10 @@ function PlayerButtons({ className }: { className?: string }) {
       <Button
         color="red"
         rightIcon={<Trash />}
-        onClick={() => blockUser()}
+        onClick={() => {
+          blockUser()
+          dispatch(currentClipWatched())
+        }}
         disabled={!currentClipId}
       >
         Gówno
