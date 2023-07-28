@@ -10,6 +10,7 @@ import {
   selectCurrentClip,
 } from '../clipQueueSlice';
 import { currentClipWatched, selectCurrentId } from '../clipQueueSlice';
+import { showNotification } from '@mantine/notifications';
 
 function PlayerButtons({ className }: { className?: string }) {
   const dispatch = useAppDispatch();
@@ -62,6 +63,10 @@ function PlayerButtons({ className }: { className?: string }) {
         onClick={() => {
           blockUser()
           dispatch(currentClipWatched())
+          showNotification({
+            title: 'Wykluczenie',
+            message: `Pomyślnie zabrano możliwość użytkownikowi ${currentClip?.submitters[0]} wysyłania linków na 7 dni.`,
+          })
         }}
         disabled={!currentClipId}
       >
