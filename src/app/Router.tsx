@@ -4,6 +4,7 @@ import IfAuthenticated from '../features/auth/IfAuthenticated';
 import RequireAuth from '../features/auth/RequireAuth';
 import HistoryPage from '../features/clips/history/HistoryPage';
 import QueuePage from '../features/clips/queue/QueuePage';
+import ToplistPage from '../features/clips/toplist/ToplistPage';
 import HomePage from '../features/home/HomePage';
 import AppLayout from './AppLayout';
 
@@ -40,6 +41,14 @@ function Router() {
             element={
               <RequireAuth>
                 <HistoryPage />
+              </RequireAuth>
+            }
+          />
+          <Route
+            path="toplist"
+            element={
+              <RequireAuth>
+                <ToplistPage />
               </RequireAuth>
             }
           />
