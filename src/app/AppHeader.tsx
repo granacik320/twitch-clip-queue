@@ -69,6 +69,7 @@ function AppHeader({ noNav = false }: { noNav?: boolean }) {
               <IfAuthenticated>
                 <NavBarButton to="queue">Queue</NavBarButton>
                 <NavBarButton to="history">History</NavBarButton>
+                <NavBarButton to="toplist">Toplist</NavBarButton>
               </IfAuthenticated>
             </Group>
           )}
