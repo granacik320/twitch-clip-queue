@@ -7,11 +7,13 @@ import clipQueueReducer from '../features/clips/clipQueueSlice';
 import { tryMigrateLegacyData } from '../features/migration/legacyMigration';
 import settingsReducer from '../features/settings/settingsSlice';
 import createTwitchChatMiddleware from '../features/twitchChat/twitchChatMiddleware';
+import usersSliceReducer from '../features/clips/toplist/toplistSlice';
 
 const rootReducer = combineReducers({
   auth: authReducer,
   settings: settingsReducer,
   clipQueue: clipQueueReducer,
+  toplist: usersSliceReducer,
 });
 
 export const store = configureStore({
