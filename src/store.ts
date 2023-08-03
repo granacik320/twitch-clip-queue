@@ -1,6 +1,5 @@
 import { configureStore, combineReducers, MiddlewareAPI } from '@reduxjs/toolkit';
 import { persistStore, FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER } from 'redux-persist';
-import createAnalyticsMiddleware from '../features/analytics/analyticsMiddleware';
 import authReducer from '../features/auth/authSlice';
 import createClipQueueMiddleware from '../features/clips/clipQueueMiddleware';
 import clipQueueReducer from '../features/clips/clipQueueSlice';
@@ -23,7 +22,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(createTwitchChatMiddleware(), createClipQueueMiddleware(), createAnalyticsMiddleware()),
+    }).concat(createTwitchChatMiddleware(), createClipQueueMiddleware()),
 });
 
 
