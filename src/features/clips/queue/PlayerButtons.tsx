@@ -85,7 +85,7 @@ function PlayerButtons({ className }: { className?: string }) {
           fill= {isLove ? '#D41D6C' : '#fff'}
         />}
         onClick={() => {
-          dispatch(addPoints({ name: currentClip?.submitters[0] ? currentClip?.submitters[0] : "user" , points: 1 }))
+          isLove ? dispatch(removePoints({ name: currentClip?.submitters[0] ? currentClip?.submitters[0] : "user" , points: 1 })) : dispatch(addPoints({ name: currentClip?.submitters[0] ? currentClip?.submitters[0] : "user" , points: 1 }))
           setIsLove(!isLove)
           showNotification({
             title: 'Polubienie',
