@@ -1,6 +1,7 @@
 import { Group, Button, Switch } from '@mantine/core';
-import { Trash, PlayerSkipForward, PlayerTrackNext } from 'tabler-icons-react';
+import { Heart, Trash, PlayerSkipForward, PlayerTrackNext } from 'tabler-icons-react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
+import { showNotification } from '@mantine/notifications';
 import {
   autoplayChanged,
   currentClipSkipped,
@@ -10,9 +11,11 @@ import {
   selectCurrentClip,
 } from '../clipQueueSlice';
 import { currentClipWatched, selectCurrentId } from '../clipQueueSlice';
-import { showNotification } from '@mantine/notifications';
+import { addPoints, removePoints } from '../toplist/toplistSlice';
+import { useState } from 'react';
 
 function PlayerButtons({ className }: { className?: string }) {
+  const [isLove, setIsLove] = useState(false);
   const dispatch = useAppDispatch();
   const currentClipId = useAppSelector(selectCurrentId);
   const nextClipId = useAppSelector(selectNextId);
@@ -58,10 +61,12 @@ function PlayerButtons({ className }: { className?: string }) {
         )}
       </Group>
       <Button
-        color="red"
+        variant="gradient"
+        gradient={{ from: 'orange', to: 'red' }}
         rightIcon={<Trash />}
         onClick={() => {
           blockUser()
+          dispatch(removePoints({ name: currentClip?.submitters[0] ? currentClip?.submitters[0] : "user" , points: 10 }))
           dispatch(currentClipWatched())
           showNotification({
             title: 'Wykluczenie',
@@ -71,6 +76,26 @@ function PlayerButtons({ className }: { className?: string }) {
         disabled={!currentClipId}
       >
         Gówno
+      </Button>
+      <Button
+        color="green"
+
+        rightIcon={<Heart
+          color= {isLove ? '#D41D6C' : '#fff'}
+          fill= {isLove ? '#D41D6C' : '#fff'}
+        />}
+        onClick={() => {
+          dispatch(addPoints({ name: currentClip?.submitters[0] ? currentClip?.submitters[0] : "user" , points: 1 }))
+          setIsLove(!isLove)
+          showNotification({
+            title: 'Polubienie',
+            message: `Pomyślnie ${isLove ? 'usunięto' : 'dodano'} polubienie dla ${currentClip?.submitters[0]}, ${isLove ? ':)' : 'oby tak dalej!'}`,
+            autoClose: 3000
+          })
+        }}
+        disabled={!currentClipId}
+      >
+        Złoto
       </Button>
       <Button
         rightIcon={<PlayerTrackNext />}
