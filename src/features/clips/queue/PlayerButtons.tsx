@@ -99,7 +99,10 @@ function PlayerButtons({ className }: { className?: string }) {
       </Button>
       <Button
         rightIcon={<PlayerTrackNext />}
-        onClick={() => dispatch(currentClipWatched())}
+        onClick={() => {
+          dispatch(currentClipWatched())
+          setIsLove(!isLove)
+        }}
         disabled={!currentClipId && !nextClipId}
       >
         Next
