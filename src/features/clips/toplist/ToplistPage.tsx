@@ -1,9 +1,7 @@
-import { Anchor, Center, Container, Grid, Pagination, Text } from '@mantine/core';
+import { Container, Text } from '@mantine/core';
 import { useState } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import Clip from '../Clip';
-import { memoryClipRemoved, selectClipHistoryIdsPage } from '../clipQueueSlice';
-import clipProvider from '../providers/providers';
+import { selectClipHistoryIdsPage } from '../clipQueueSlice';
 
 function MemoryPage() {
   const dispatch = useAppDispatch();
