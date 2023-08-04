@@ -1,4 +1,4 @@
-import { Container, Button, Grid, Group, Stack, ScrollArea } from '@mantine/core';
+import { Container, Grid, Group, Stack, ScrollArea } from '@mantine/core';
 import Player from '../Player';
 import PlayerButtons from '../PlayerButtons';
 import PlayerTitle from '../PlayerTitle';
