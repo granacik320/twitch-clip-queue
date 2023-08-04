@@ -67,7 +67,12 @@ function PopupContent() {
   );
 }
 
-function FullscreenWithPopupLayout() {
+interface LoveProps {
+  isLove: boolean;
+  setIsLove: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const FullscreenWithPopupLayout: React.FC<LoveProps> = ({isLove, setIsLove}) => {
   const [key, setKey] = useState(randomId());
 
   return (
@@ -79,11 +84,11 @@ function FullscreenWithPopupLayout() {
         <Container size="xl">
           <Group position="apart" align="flex-end" pb="sm">
             <PlayerTitle />
-            <PlayerButtons />
+            <PlayerButtons isLove={isLove} setIsLove={setIsLove}/>
           </Group>
           <QueueControlPanel />
           <Grid pt="sm">
-            <Queue card wrapper={({ children }) => <Grid.Col span={2}>{children}</Grid.Col>} />
+            <Queue isLove={isLove} setIsLove={setIsLove} card wrapper={({ children }) => <Grid.Col span={2}>{children}</Grid.Col>} />
           </Grid>
         </Container>
       </Container>

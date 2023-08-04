@@ -1,11 +1,17 @@
-import { Container, Grid, Group, Stack, ScrollArea } from '@mantine/core';
+import { Container, Button, Grid, Group, Stack, ScrollArea } from '@mantine/core';
 import Player from '../Player';
 import PlayerButtons from '../PlayerButtons';
 import PlayerTitle from '../PlayerTitle';
 import Queue from '../Queue';
 import QueueControlPanel from '../QueueControlPanel';
+import React from 'react';
 
-function ClassicLayout() {
+interface LoveProps {
+  isLove: boolean;
+  setIsLove: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ClassicLayout: React.FC<LoveProps> = ({isLove, setIsLove}) => {
   return (
     <Container fluid py="md" sx={{ height: '100%' }}>
       <Grid sx={{ height: '100%' }} columns={24}>
@@ -14,7 +20,7 @@ function ClassicLayout() {
             <Player />
             <Group position="apart">
               <PlayerTitle />
-              <PlayerButtons />
+              <PlayerButtons isLove={isLove} setIsLove={setIsLove}/>
             </Group>
           </Stack>
         </Grid.Col>
@@ -23,7 +29,7 @@ function ClassicLayout() {
             <QueueControlPanel />
             <ScrollArea sx={{ '.mantine-ScrollArea-viewport > div': { display: 'block !important' } }}>
               <Group direction="column" spacing="xs" sx={{ height: '100%' }}>
-                <Queue />
+                <Queue isLove={isLove} setIsLove={setIsLove}/>
               </Group>
             </ScrollArea>
           </Stack>

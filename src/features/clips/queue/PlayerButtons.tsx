@@ -12,10 +12,15 @@ import {
 } from '../clipQueueSlice';
 import { currentClipWatched, selectCurrentId } from '../clipQueueSlice';
 import { addPoints, removePoints } from '../toplist/toplistSlice';
-import { useState } from 'react';
+import React from 'react';
 
-function PlayerButtons({ className }: { className?: string }) {
-  const [isLove, setIsLove] = useState(false);
+interface PlayerButtonsProps {
+  isLove: boolean;
+  setIsLove: React.Dispatch<React.SetStateAction<boolean>>;
+  className?: string;
+}
+
+function PlayerButtons({ className, isLove, setIsLove }: PlayerButtonsProps) {
   const dispatch = useAppDispatch();
   const currentClipId = useAppSelector(selectCurrentId);
   const nextClipId = useAppSelector(selectNextId);
@@ -66,6 +71,7 @@ function PlayerButtons({ className }: { className?: string }) {
         rightIcon={<Trash />}
         onClick={() => {
           blockUser()
+          setIsLove(false)
           dispatch(removePoints({ name: currentClip?.submitters[0] ? currentClip?.submitters[0] : "user" , points: 10 }))
           dispatch(currentClipWatched())
           showNotification({
@@ -101,7 +107,7 @@ function PlayerButtons({ className }: { className?: string }) {
         rightIcon={<PlayerTrackNext />}
         onClick={() => {
           dispatch(currentClipWatched())
-          setIsLove(!isLove)
+          setIsLove(false)
         }}
         disabled={!currentClipId && !nextClipId}
       >

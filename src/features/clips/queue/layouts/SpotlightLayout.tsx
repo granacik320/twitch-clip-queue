@@ -4,21 +4,27 @@ import PlayerButtons from '../PlayerButtons';
 import PlayerTitle from '../PlayerTitle';
 import Queue from '../Queue';
 import QueueControlPanel from '../QueueControlPanel';
+import React from 'react';
 
-function SpotlightLayout() {
+interface LoveProps {
+  isLove: boolean;
+  setIsLove: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const SpotlightLayout: React.FC<LoveProps> = ({isLove, setIsLove}) => {
   return (
     <Container fluid pt="md">
       <Container size="md">
         <Player />
         <Group position="apart" pt="xs">
           <PlayerTitle />
-          <PlayerButtons />
+          <PlayerButtons isLove={isLove} setIsLove={setIsLove}/>
         </Group>
       </Container>
       <Container size="xl">
         <QueueControlPanel />
         <Grid pt="sm">
-          <Queue card wrapper={({ children }) => <Grid.Col span={2}>{children}</Grid.Col>} />
+          <Queue isLove={isLove} setIsLove={setIsLove} card wrapper={({ children }) => <Grid.Col span={2}>{children}</Grid.Col>} />
         </Grid>
       </Container>
     </Container>
