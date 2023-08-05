@@ -11,6 +11,8 @@ import { processCommand } from './chatCommands';
 
 const logger = createLogger('Twitch Chat');
 
+
+
 const createClient = ({ token, username }: { token: string; username: string }) => {
   const client = new Client({
     options: {
@@ -47,7 +49,6 @@ open.onupgradeneeded = function (event: IDBVersionChangeEvent) {
 };
 
 open.onsuccess = function (event: Event) {
-  console.log("working")
   const db: IDBDatabase = open.result;
   const tx: IDBTransaction = db.transaction("banlist", "readwrite");
 
@@ -59,7 +60,6 @@ open.onsuccess = function (event: Event) {
     .openCursor(range).onsuccess = function (event: Event) {
     const cursor: IDBCursorWithValue = (event.target as IDBRequest).result;
     if (!cursor) return;
-    console.log("del")
     cursor.delete();
     cursor.continue();
   };
@@ -85,13 +85,10 @@ const handleMessage =
 
     const url = getUrlFromMessage(message);
     if (url) {
-      console.log("update db ")
       const db: IDBDatabase = open.result;
       const tx: IDBTransaction = db.transaction("banlist", "readwrite");
 
       const range: IDBKeyRange = IDBKeyRange.upperBound(new Date());
-      console.log(range)
-
       tx
         .objectStore("banlist")
         .index("timestamp")
@@ -104,7 +101,6 @@ const handleMessage =
       const getResult = tx.objectStore("banlist").get(userstate.username)
       getResult.onsuccess = function() {
         if (getResult.result === undefined){
-          console.log('pog')
           storeApi.dispatch(urlReceived({ url, userstate }));
         }
       }

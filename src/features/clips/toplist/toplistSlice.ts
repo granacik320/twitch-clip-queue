@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import storage from 'redux-persist-indexeddb-storage';
 import { persistReducer } from 'redux-persist';
+import { createSelector } from '@reduxjs/toolkit';
+import { RootState } from '../../../app/store';
+import axios from "axios";
+const orderBy = require('lodash.orderby');
+const TWITCH_CLIENT_ID = process.env.REACT_APP_TWITCH_CLIENT_ID;
 
 interface User {
   name: string;
@@ -40,6 +45,21 @@ const usersSlice = createSlice({
 });
 
 export const { addPoints, removePoints } = usersSlice.actions;
+
+export const getUserInfoByName = async (username:string, token?:string): Promise<{ data: []; status: number }> => {
+  const { data, status } = await axios.get(`https://api.twitch.tv/helix/users?display_name=${username}`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Client-Id': TWITCH_CLIENT_ID,
+    },
+  });
+  return { data, status };
+};
+
+export const selectUsers = createSelector(
+    (state: RootState) => state.toplist.users,
+    (users) => orderBy(users, ['points'], ['desc']).slice(0,3)
+);
 
 const usersSliceReducer = persistReducer(
   {

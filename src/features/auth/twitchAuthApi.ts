@@ -1,10 +1,10 @@
 import axios from 'axios';
 import { TokenInfo, UserInfo } from '../../common/models/twitch';
+import {createSelector} from "@reduxjs/toolkit";
+import {RootState} from "../../app/store";
 
 const TWITCH_CLIENT_ID = process.env.REACT_APP_TWITCH_CLIENT_ID;
 const TWITCH_REDIRECT_URI = process.env.REACT_APP_TWITCH_REDIRECT_URI;
-
-console.log(process.env.REACT_APP_TWITCH_CLIENT_ID)
 
 const defaultScopes = ['openid', 'chat:read'];
 
@@ -49,6 +49,11 @@ const revokeToken = async (token: string): Promise<void> => {
     },
   });
 };
+
+export const getToken = createSelector(
+    (state: RootState) => state.auth.token,
+    (token) => token
+);
 
 const twitchAuthApi = {
   getLoginUrl,
