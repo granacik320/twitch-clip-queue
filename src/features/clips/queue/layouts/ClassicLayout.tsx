@@ -5,6 +5,8 @@ import PlayerTitle from '../PlayerTitle';
 import Queue from '../Queue';
 import QueueControlPanel from '../QueueControlPanel';
 import React from 'react';
+import useWindowSize from 'react-use/lib/useWindowSize'
+import Confetti from "react-confetti";
 
 interface LoveProps {
   isLove: boolean;
@@ -12,8 +14,17 @@ interface LoveProps {
 }
 
 const ClassicLayout: React.FC<LoveProps> = ({isLove, setIsLove}) => {
+  const { width, height } = useWindowSize()
   return (
     <Container fluid py="md" sx={{ height: '100%' }}>
+      {isLove && (
+          <Confetti
+              width={width}
+              height={height}
+              numberOfPieces={200}
+              recycle={false}
+          />
+      )}
       <Grid sx={{ height: '100%' }} columns={24}>
         <Grid.Col xs={14} sm={15} md={15} lg={17} xl={19} span={19}>
           <Stack justify="flex-start" spacing="xs" sx={{ height: '100%' }}>
