@@ -1,7 +1,7 @@
 import {Avatar, Container, Table, Text} from '@mantine/core';
  import { useSelector } from 'react-redux';
- import {getUserInfoByName, selectUsers} from './toplistSlice';
- import { getToken } from '../../auth/twitchAuthApi'
+ import { selectUsers } from './toplistSlice';
+ // import { getToken } from '../../auth/twitchAuthApi'
 
  // getUserInfoByName(user.name, useSelector(getToken)).then(function (res) {
  //
@@ -9,7 +9,7 @@ import {Avatar, Container, Table, Text} from '@mantine/core';
 
  function MemoryPage() {
      const users = useSelector(selectUsers);
-     const token = useSelector(getToken);
+     // const token = useSelector(getToken);
      console.log(users)
      return (
          <Container size="xl" py="md" m="auto">
