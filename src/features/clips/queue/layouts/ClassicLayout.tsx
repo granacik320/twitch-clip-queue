@@ -8,7 +8,7 @@ import React from 'react';
 import useWindowSize from 'react-use/lib/useWindowSize'
 import Confetti from "react-confetti";
 import {Dropzone, DropzoneStatus, MS_EXCEL_MIME_TYPE} from "@mantine/dropzone";
-import {Upload, FileSpreadsheet, X, Icon as TablerIcon} from 'tabler-icons-react';
+import {Upload, FileSpreadsheet, Icon as TablerIcon} from 'tabler-icons-react';
 import * as xlsx from 'xlsx';
 import {clipDetailsFailed, clipDetailsReceived, clipStubReceived} from "../../clipQueueSlice";
 import {formatISO} from "date-fns";
