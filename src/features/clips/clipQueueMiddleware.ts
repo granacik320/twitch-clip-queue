@@ -35,6 +35,7 @@ const createClipQueueMiddleware = (): Middleware<{}, RootState> => {
           const id = clipProvider.getIdFromUrl(url);
           if (id) {
             const clip: Clip | undefined = storeAPI.getState().clipQueue.byId[id];
+            console.log(id, [sender], formatISO(new Date()), clip)
 
             storeAPI.dispatch(clipStubReceived({ id, submitters: [sender], timestamp: formatISO(new Date()) }));
 

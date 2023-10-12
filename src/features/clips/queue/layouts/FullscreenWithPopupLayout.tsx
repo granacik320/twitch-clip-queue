@@ -70,9 +70,11 @@ function PopupContent() {
 interface LoveProps {
   isLove: boolean;
   setIsLove: React.Dispatch<React.SetStateAction<boolean>>;
+  openUploadModal: boolean;
+  setOpenUploadModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const FullscreenWithPopupLayout: React.FC<LoveProps> = ({isLove, setIsLove}) => {
+const FullscreenWithPopupLayout: React.FC<LoveProps> = ({isLove, setIsLove, openUploadModal, setOpenUploadModal}) => {
   const [key, setKey] = useState(randomId());
 
   return (
@@ -86,7 +88,7 @@ const FullscreenWithPopupLayout: React.FC<LoveProps> = ({isLove, setIsLove}) => 
             <PlayerTitle />
             <PlayerButtons isLove={isLove} setIsLove={setIsLove}/>
           </Group>
-          <QueueControlPanel />
+          <QueueControlPanel openUploadModal={openUploadModal} setOpenUploadModal={setOpenUploadModal}/>
           <Grid pt="sm">
             <Queue isLove={isLove} setIsLove={setIsLove} card wrapper={({ children }) => <Grid.Col span={2}>{children}</Grid.Col>} />
           </Grid>

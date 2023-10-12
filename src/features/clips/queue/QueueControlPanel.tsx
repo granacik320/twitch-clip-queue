@@ -1,4 +1,4 @@
-import { Group, Text, SegmentedControl, Stack } from '@mantine/core';
+import {Group, Text, SegmentedControl, Stack, ActionIcon} from '@mantine/core';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import {
   isOpenChanged,
@@ -8,12 +8,16 @@ import {
   selectTotalQueueLength,
 } from '../clipQueueSlice';
 import QueueQuickMenu from './QueueQuickMenu';
+import {PlaylistAdd} from "tabler-icons-react";
+import React from "react";
 
 interface QueueControlPanelProps {
   className?: string;
+  openUploadModal: boolean;
+  setOpenUploadModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-function QueueControlPanel({ className }: QueueControlPanelProps) {
+const QueueControlPanel: React.FC<QueueControlPanelProps> = ({className, openUploadModal, setOpenUploadModal}) => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector(selectIsOpen);
   const clipLimit = useAppSelector(selectClipLimit);
@@ -26,6 +30,9 @@ function QueueControlPanel({ className }: QueueControlPanelProps) {
         <Text size="lg" weight={700} sx={{ flexGrow: 1 }}>
           Queue
         </Text>
+        <ActionIcon color='indigo' onClick={() => setOpenUploadModal(true)}>
+          <PlaylistAdd size={28}/>
+        </ActionIcon>
         <SegmentedControl
           size="xs"
           sx={{ flexBasis: 196 }}
