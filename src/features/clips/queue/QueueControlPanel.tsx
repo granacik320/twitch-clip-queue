@@ -16,7 +16,6 @@ interface QueueControlPanelProps {
   openUploadModal: boolean;
   setOpenUploadModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
 const QueueControlPanel: React.FC<QueueControlPanelProps> = ({className, openUploadModal, setOpenUploadModal}) => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector(selectIsOpen);
@@ -30,9 +29,6 @@ const QueueControlPanel: React.FC<QueueControlPanelProps> = ({className, openUpl
         <Text size="lg" weight={700} sx={{ flexGrow: 1 }}>
           Queue
         </Text>
-        <ActionIcon color='indigo' onClick={() => setOpenUploadModal(true)}>
-          <PlaylistAdd size={28}/>
-        </ActionIcon>
         <SegmentedControl
           size="xs"
           sx={{ flexBasis: 196 }}
@@ -43,12 +39,17 @@ const QueueControlPanel: React.FC<QueueControlPanelProps> = ({className, openUpl
           ]}
           onChange={(state) => dispatch(isOpenChanged(state === 'open'))}
         />
+      </Group>
+      <Group>
+        <ActionIcon color='indigo' onClick={() => setOpenUploadModal(true)}>
+          <PlaylistAdd size={28}/>
+        </ActionIcon>
+        <Text size="md" weight={700} mt={0} pt={0}>
+          {clipsLeft} of {totalClips}
+          {clipLimit && `/${clipLimit}`} clips left
+        </Text>
         <QueueQuickMenu />
       </Group>
-      <Text size="md" weight={700} sx={{ flexGrow: 1 }} mt={0} pt={0}>
-        {clipsLeft} of {totalClips}
-        {clipLimit && `/${clipLimit}`} clips left
-      </Text>
     </Stack>
   );
 }

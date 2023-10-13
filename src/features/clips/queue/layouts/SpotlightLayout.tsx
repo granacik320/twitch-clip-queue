@@ -5,6 +5,7 @@ import PlayerTitle from '../PlayerTitle';
 import Queue from '../Queue';
 import QueueControlPanel from '../QueueControlPanel';
 import React from 'react';
+import DropzoneModal from "./DropzoneModal";
 
 interface LoveProps {
   isLove: boolean;
@@ -16,6 +17,7 @@ interface LoveProps {
 const SpotlightLayout: React.FC<LoveProps> = ({isLove, setIsLove, openUploadModal, setOpenUploadModal}) => {
   return (
     <Container fluid pt="md">
+        <DropzoneModal openUploadModal={openUploadModal} setOpenUploadModal={setOpenUploadModal}></DropzoneModal>
       <Container size="md">
         <Player />
         <Group position="apart" pt="xs">

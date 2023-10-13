@@ -7,6 +7,7 @@ import PlayerButtons from '../PlayerButtons';
 import PlayerTitle from '../PlayerTitle';
 import Queue from '../Queue';
 import QueueControlPanel from '../QueueControlPanel';
+import DropzoneModal from "./DropzoneModal";
 
 function copyStyles(sourceDoc: Document, targetDoc: Document) {
   Array.from(sourceDoc.styleSheets).forEach((styleSheet) => {
@@ -80,6 +81,7 @@ const FullscreenWithPopupLayout: React.FC<LoveProps> = ({isLove, setIsLove, open
   return (
     <React.Fragment key={key}>
       <Container fluid py="md">
+        <DropzoneModal openUploadModal={openUploadModal} setOpenUploadModal={setOpenUploadModal}></DropzoneModal>
         <Button variant="default" onClick={() => setKey(randomId())}>
           Reload layout
         </Button>
