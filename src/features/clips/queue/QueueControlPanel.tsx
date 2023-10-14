@@ -53,5 +53,4 @@ const QueueControlPanel: React.FC<QueueControlPanelProps> = ({className, openUpl
     </Stack>
   );
 }
-
 export default QueueControlPanel;
