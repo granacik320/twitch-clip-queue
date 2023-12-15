@@ -106,7 +106,7 @@ const Waring = ({currentClipId, setIsLove, setIsWatching}: WarningProps) => {
         }}
     >
       <Center>
-        <Image height={256} width={256} src={'twitch-clip-queue/hand.jpg'}></Image>
+        <Image height={256} width={256} src={'/hand.jpg'}></Image>
         <Box ml={24}>
           <Title order={1}>Uwaga</Title>
           <Text size="sm">Ta kategoria jest wyłączona w ustawieniach</Text>
