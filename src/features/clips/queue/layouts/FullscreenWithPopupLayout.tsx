@@ -55,12 +55,12 @@ function Popup({ children }: PropsWithChildren<{}>) {
   return <Portal target={containerEl}>{children}</Portal>;
 }
 
-function PopupContent() {
+function PopupContent(props: { setIsLove: React.Dispatch<React.SetStateAction<boolean>> }) {
   return (
     <AppLayout noNav>
       <Container fluid py="md" sx={{ height: '100%' }}>
         <Stack justify="flex-start" sx={{ height: '100%' }}>
-          <Player />
+          <Player setIsLove={props.setIsLove}/>
           <PlayerTitle />
         </Stack>
       </Container>
@@ -97,7 +97,7 @@ const FullscreenWithPopupLayout: React.FC<LoveProps> = ({isLove, setIsLove, open
         </Container>
       </Container>
       <Popup>
-        <PopupContent />
+        <PopupContent setIsLove={setIsLove}/>
       </Popup>
     </React.Fragment>
   );

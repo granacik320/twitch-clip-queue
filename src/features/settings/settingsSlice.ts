@@ -10,11 +10,13 @@ interface SettingsState {
   colorScheme: ColorScheme | null;
   channel?: string;
   commandPrefix: string;
+  disabledCategory: string[];
 }
 
 const initialState: SettingsState = {
   colorScheme: null,
   commandPrefix: '!queue',
+  disabledCategory: [],
 };
 
 const settingsSlice = createSlice({
@@ -37,6 +39,9 @@ const settingsSlice = createSlice({
       if (payload.commandPrefix) {
         state.commandPrefix = payload.commandPrefix;
       }
+      if (payload.disabledCategory) {
+        state.disabledCategory = payload.disabledCategory;
+      }
     },
   },
   extraReducers: (builder) => {
@@ -56,6 +61,7 @@ const settingsSlice = createSlice({
 const selectSettings = (state: RootState): SettingsState => state.settings;
 export const selectChannel = (state: RootState) => state.settings.channel;
 export const selectCommandPrefix = (state: RootState) => state.settings.commandPrefix;
+export const selectDisabledCategory = (state: RootState) => state.settings.disabledCategory;
 
 export const selectColorScheme = createSelector(
   [selectSettings, (_, defaultColorScheme: ColorScheme) => defaultColorScheme],

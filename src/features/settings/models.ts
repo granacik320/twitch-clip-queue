@@ -5,6 +5,7 @@ export interface AllSettings {
   channel?: string;
   colorScheme?: ColorScheme;
   commandPrefix?: string;
+  disabledCategory?: string[];
 
   enabledProviders?: string[];
 

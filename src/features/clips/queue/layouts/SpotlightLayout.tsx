@@ -19,7 +19,7 @@ const SpotlightLayout: React.FC<LoveProps> = ({isLove, setIsLove, openUploadModa
     <Container fluid pt="md">
         <DropzoneModal openUploadModal={openUploadModal} setOpenUploadModal={setOpenUploadModal}></DropzoneModal>
       <Container size="md">
-        <Player />
+        <Player setIsLove={setIsLove}/>
         <Group position="apart" pt="xs">
           <PlayerTitle />
           <PlayerButtons isLove={isLove} setIsLove={setIsLove}/>

@@ -33,7 +33,7 @@ const ClassicLayout: React.FC<LoveProps> = ({isLove, setIsLove, openUploadModal,
       <Grid sx={{ height: '100%' }} columns={24}>
         <Grid.Col xs={14} sm={15} md={15} lg={17} xl={19} span={19}>
           <Stack justify="flex-start" spacing="xs" sx={{ height: '100%' }}>
-            <Player />
+            <Player setIsLove={setIsLove}/>
             <Group position="apart">
               <PlayerTitle />
               <PlayerButtons isLove={isLove} setIsLove={setIsLove}/>

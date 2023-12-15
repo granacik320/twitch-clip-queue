@@ -3,6 +3,7 @@ import { MouseEventHandler } from 'react';
 import { Trash } from 'tabler-icons-react';
 import { useAppSelector } from '../../app/hooks';
 import { selectClipById } from './clipQueueSlice';
+import {selectDisabledCategory} from "../settings/settingsSlice";
 
 interface ClipProps {
   clipId: string;
@@ -15,7 +16,10 @@ interface ClipProps {
 }
 
 function Clip({ clipId, onClick, onCrossClick, className, card }: ClipProps) {
-  const { title, thumbnailUrl = '', author, submitters } = useAppSelector(selectClipById(clipId));
+  const { title, thumbnailUrl = '', author, submitters, category } = useAppSelector(selectClipById(clipId));
+  const disabledCategory = useAppSelector(selectDisabledCategory);
+
+  const isCategoryDisabled = disabledCategory?.includes(category!);
 
   return (
     <Box
@@ -28,6 +32,9 @@ function Clip({ clipId, onClick, onCrossClick, className, card }: ClipProps) {
         '& .clip--action-icon': { display: 'none' },
         '&:hover .clip--action-icon': { display: 'block' },
         '&:hover .clip--title': { color: onClick ? theme.colors.indigo[5] : undefined },
+          borderLeft: isCategoryDisabled ? '3px solid red' : undefined,
+          paddingLeft: isCategoryDisabled ? '3px' : undefined,
+          borderRadius: isCategoryDisabled ? '3px' : undefined,
       })}
     >
       <Group
@@ -56,7 +63,7 @@ function Clip({ clipId, onClick, onCrossClick, className, card }: ClipProps) {
           }}
         >
           <Skeleton visible={!thumbnailUrl}>
-            <Image src={thumbnailUrl} sx={{ backgroundColor: '#373A40', borderRadius: 4 }} />
+            <Image src={thumbnailUrl} sx={{ backgroundColor: '#373A40', borderRadius: 4, filter: isCategoryDisabled ? 'blur(4px)' : undefined}} />
           </Skeleton>
         </AspectRatio>
         <Stack spacing={0} align="flex-start" sx={{ width: '100%' }}>
@@ -82,6 +89,12 @@ function Clip({ clipId, onClick, onCrossClick, className, card }: ClipProps) {
               {submitters.length > 1 && ` +${submitters.length - 1}`}
             </Text>
           )}
+          {category && (
+              <Text size="xs" color="dimmed" lineClamp={1} title={category}>
+                  Category ID: <strong>{category}</strong>
+              </Text>
+          )}
+
         </Stack>
       </Group>
       {onCrossClick && (

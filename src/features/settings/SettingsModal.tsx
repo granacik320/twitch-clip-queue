@@ -1,7 +1,7 @@
 import { Button, Chip, Chips, Group, Stack, TextInput, Text, NumberInput, Tabs, Select, Code } from '@mantine/core';
 import { useForm } from '@mantine/hooks';
 import { useModals } from '@mantine/modals';
-import { History, Settings, Slideshow } from 'tabler-icons-react';
+import {History, Settings, Slideshow} from 'tabler-icons-react';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import {
   memoryPurged,
@@ -10,7 +10,7 @@ import {
   selectLayout,
   selectProviders,
 } from '../clips/clipQueueSlice';
-import { selectChannel, selectCommandPrefix, settingsChanged } from './settingsSlice';
+import {selectDisabledCategory, selectChannel, selectCommandPrefix, settingsChanged} from './settingsSlice';
 
 function SettingsModal({ closeModal }: { closeModal: () => void }) {
   const dispatch = useAppDispatch();
@@ -20,9 +20,10 @@ function SettingsModal({ closeModal }: { closeModal: () => void }) {
   const enabledProviders = useAppSelector(selectProviders);
   const layout = useAppSelector(selectLayout);
   const historyIds = useAppSelector(selectHistoryIds);
+  const disabledCategory = useAppSelector(selectDisabledCategory);
 
   const form = useForm({
-    initialValues: { channel, commandPrefix, clipLimit, enabledProviders, layout },
+    initialValues: { channel, commandPrefix, clipLimit, enabledProviders, layout, disabledCategory},
   });
 
   return (
@@ -53,6 +54,14 @@ function SettingsModal({ closeModal }: { closeModal: () => void }) {
                   Example commands: <Code>{form.values.commandPrefix}open</Code>,{' '}
                   <Code>{form.values.commandPrefix}next</Code>
                 </Text>
+              </Stack>
+              <Stack spacing="sm">
+                <Text size="sm">Wyłącz kategorie</Text>
+                <Chips multiple {...form.getInputProps('disabledCategory')}>
+                  <Chip value="509660">Art</Chip>
+                  <Chip value="116747788">Hot Tubs</Chip>
+                  <Chip value="509659">ASMR</Chip>
+                </Chips>
               </Stack>
             </Stack>
           </Tabs.Tab>

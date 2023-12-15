@@ -43,6 +43,7 @@ class TwitchClipProvider implements ClipProvider {
       submitters: [],
       thumbnailUrl: clipInfo.thumbnail_url?.replace('%{width}x%{height}', '480x272'),
       createdAt: clipInfo.created_at,
+      category: clipInfo.game_id,
     };
   }
 

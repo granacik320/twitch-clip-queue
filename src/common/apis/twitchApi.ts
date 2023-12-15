@@ -18,6 +18,7 @@ const twitchApiClient = axios.create({
 
 twitchApiClient.interceptors.request.use((request) => {
   const { token } = store?.getState().auth;
+
   if (token) {
     request.headers = { Authorization: `Bearer ${token}`, ...request.headers };
   }
