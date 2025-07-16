@@ -1,0 +1,14 @@
+:root {
+  --initial-background-color: #FFFFFF;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --initial-background-color: #1A1B1E;
+  }
+}
+html {
+  background: var(--initial-background-color);
+}
+
+/*# sourceMappingURL=index.css.map */
