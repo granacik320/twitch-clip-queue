@@ -15,7 +15,7 @@ function FeaturesSection() {
         }
       >
         <List.Item>
-          <strong>Supports Twitch clip, Twitch VOD, YouTube and Streamable video links</strong>
+          <strong>Supports Twitch clip, Kick Clips,Twitch VOD, YouTube and Streamable video links</strong>
         </List.Item>
         <List.Item>
           <strong>Integrates with Twitch chat</strong>

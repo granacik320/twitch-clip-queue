@@ -7,12 +7,14 @@ import {
   selectAutoplayTimeoutHandle,
   selectCurrentClip,
   selectNextId,
+    selectAutoplayUrl
 } from '../clipQueueSlice';
 import ReactPlayer from 'react-player/lazy';
 import clipProvider from '../providers/providers';
 import {selectDisabledCategory} from "../../settings/settingsSlice";
 import {PlayerPlay, PlayerTrackNext} from "tabler-icons-react";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
+import VideoPlayer from "./VideoPlayer";
 
 interface PlayerProps {
   className?: string;
@@ -27,18 +29,31 @@ function Player({ className, setIsLove }: PlayerProps) {
   const autoplayTimeoutHandle = useAppSelector(selectAutoplayTimeoutHandle);
   const disabledCategory = useAppSelector(selectDisabledCategory);
   const [isWatchin, setIsWatching] = useState(false);
+  const [videoSrc, setVideoSrc] = useState<string | undefined>(undefined);
+  const autoplayUrl = useAppSelector(selectAutoplayUrl);
+
+    useEffect(() => {
+        if (!currentClip) return;
+
+        const fetchVideoUrl = async () => {
+            const url = await clipProvider.getAutoplayUrl(currentClip.id);
+            setVideoSrc(url);
+        };
+
+        fetchVideoUrl();
+    }, [currentClip]);
 
   let player = undefined;
   if (currentClip) {
+      const isKickClip = currentClip.id.includes('clip_');
     if (autoplayEnabled) {
-      const autoplayUrl = clipProvider.getAutoplayUrl(currentClip.id, currentClip);
       if (autoplayUrl && ReactPlayer.canPlay(autoplayUrl)) {
         player = (
           <ReactPlayer
             key={currentClip.id}
             playing
             controls
-            url={autoplayUrl}
+            url={videoSrc}
             width="100%"
             height="100%"
             style={{
@@ -52,21 +67,22 @@ function Player({ className, setIsLove }: PlayerProps) {
     }
 
     if (!player) {
-      const embedUrl = clipProvider.getEmbedUrl(currentClip.id);
-      player = (
-        <iframe
-          key={currentClip.id}
-          src={embedUrl}
-          title={currentClip.title}
-          style={{
-            height: '100%',
-            width: '100%',
-          }}
-          frameBorder="0"
-          allow="autoplay"
-          allowFullScreen
-        ></iframe>
-      );
+        if (isKickClip) {
+            player = <VideoPlayer key={currentClip.id} src={currentClip.url} />;
+        } else {
+            const embedUrl = clipProvider.getEmbedUrl(currentClip.id);
+            player = (
+                <iframe
+                    key={currentClip.id}
+                    src={embedUrl}
+                    title={currentClip.title}
+                    style={{ height: '100%', width: '100%' }}
+                    frameBorder="0"
+                    allow="autoplay"
+                    allowFullScreen
+                ></iframe>
+            );
+        }
     }
   }
   return (

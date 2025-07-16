@@ -83,6 +83,7 @@ function SettingsModal({ closeModal }: { closeModal: () => void }) {
                 <Chips multiple {...form.getInputProps('enabledProviders')}>
                   <Chip value="twitch-clip">Twitch Clips</Chip>
                   <Chip value="twitch-vod">Twitch Videos / VODs</Chip>
+                  <Chip value="kick-clip">Kick Clips</Chip>
                   <Chip value="youtube">YouTube</Chip>
                   <Chip value="streamable">Streamable</Chip>
                 </Chips>

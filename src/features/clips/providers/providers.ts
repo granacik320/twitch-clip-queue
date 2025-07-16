@@ -4,6 +4,7 @@ import streamableProvider from './streamable/streamableProvider';
 import twitchClipProvider from './twitchClip/twitchClipProvider';
 import twitchVodProvider from './twitchVod/twitchVodProvider';
 import youtubeProvider from './youtube/youtubeProvider';
+import kickClipProvider from './kickClip/kickClipProvider';
 
 const logger = createLogger('CombinedClipProvider');
 
@@ -13,7 +14,7 @@ export interface ClipProvider {
   getClipById(id: string): Promise<Clip | undefined>;
   getUrl(id: string): string | undefined;
   getEmbedUrl(id: string): string | undefined;
-  getAutoplayUrl(id: string, clip: Clip): string | undefined;
+  getAutoplayUrl(id: string): Promise<string | undefined>;
 }
 
 class CombinedClipProvider implements ClipProvider {
@@ -23,6 +24,7 @@ class CombinedClipProvider implements ClipProvider {
     [twitchVodProvider.name]: twitchVodProvider,
     [youtubeProvider.name]: youtubeProvider,
     [streamableProvider.name]: streamableProvider,
+    [kickClipProvider.name]: kickClipProvider,
   };
   enabledProviders: string[] = [];
 
@@ -58,9 +60,9 @@ class CombinedClipProvider implements ClipProvider {
     const [provider, idPart] = this.getProviderAndId(id);
     return provider?.getEmbedUrl(idPart);
   }
-  getAutoplayUrl(id: string, clip: Clip): string | undefined {
+  async getAutoplayUrl(id: string): Promise<string | undefined> {
     const [provider, idPart] = this.getProviderAndId(id);
-    return provider?.getAutoplayUrl(idPart, clip);
+    return await provider?.getAutoplayUrl(idPart);
   }
 
   setProviders(providers: string[]) {
