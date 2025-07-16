@@ -1,4 +1,4 @@
-import { Modal, Button, Stack, Text, List, Image, Divider } from '@mantine/core';
+import { Button, Stack, Text, List, Image, Divider } from '@mantine/core';
 
 interface ChangelogModalProps {
   opened: boolean;
@@ -21,4 +21,4 @@ export default function ChangelogModal({ opened, onClose }: ChangelogModalProps)
     <Button mt="md" onClick={onClose}>Zamknij</Button>
   </Stack>
   );
-} 
+}

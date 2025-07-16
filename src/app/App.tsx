@@ -3,7 +3,7 @@ import { useColorScheme } from '@mantine/hooks';
 import { ModalsProvider } from '@mantine/modals';
 import { NotificationsProvider } from '@mantine/notifications';
 import { useEffect } from 'react';
-import { selectAccessToken, authenticateWithToken, selectAuthState, selectUsername } from '../features/auth/authSlice';
+import { selectAccessToken, authenticateWithToken, selectAuthState } from '../features/auth/authSlice';
 import { colorSchemeToggled, selectColorScheme } from '../features/settings/settingsSlice';
 import { useAppDispatch, useAppSelector } from './hooks';
 import Router from './Router';
